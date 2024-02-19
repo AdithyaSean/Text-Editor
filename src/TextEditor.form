@@ -70,7 +70,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonRedo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtField" pref="188" max="32767" attributes="0"/>
+                      <Component id="txtField" pref="256" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonFind" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -93,7 +93,7 @@
                   <Component id="txtField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="256" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" pref="286" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -120,6 +120,14 @@
         <Property name="text" type="java.lang.String" value="Replace"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JTextField" name="txtField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Find and Replace"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldFocusGained"/>
+      </Events>
+    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -132,19 +140,8 @@
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextAreaKeyTyped"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="txtField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Find and Replace"/>
-      </Properties>
-      <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldFocusGained"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>

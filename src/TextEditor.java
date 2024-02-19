@@ -2,6 +2,8 @@ import java.io.*;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class TextEditor extends javax.swing.JFrame {
     public TextEditor() {
@@ -15,9 +17,9 @@ public class TextEditor extends javax.swing.JFrame {
         jButtonRedo = new javax.swing.JButton();
         jButtonFind = new javax.swing.JButton();
         jButtonReplace = new javax.swing.JButton();
+        txtField = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea = new javax.swing.JTextArea();
-        txtField = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         openItem = new javax.swing.JMenuItem();
@@ -34,21 +36,33 @@ public class TextEditor extends javax.swing.JFrame {
 
         jButtonReplace.setText("Replace");
 
-        jTextArea.setColumns(20);
-        jTextArea.setRows(5);
-        jTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextAreaKeyTyped(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jTextArea);
-
         txtField.setText("Find and Replace");
         txtField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtFieldFocusGained(evt);
             }
         });
+
+        jTextArea.setColumns(20);
+        jTextArea.setRows(5);
+        jTextArea.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                jTextAreaTextChanged();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                jTextAreaTextChanged();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                jTextAreaTextChanged();
+            }
+        });
+
+        jScrollPane2.setViewportView(jTextArea);
 
         jMenu.setText("File");
 
@@ -88,7 +102,7 @@ public class TextEditor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonRedo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtField, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                        .addComponent(txtField, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonFind)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -106,7 +120,7 @@ public class TextEditor extends javax.swing.JFrame {
                     .addComponent(jButtonReplace)
                     .addComponent(txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -117,11 +131,6 @@ public class TextEditor extends javax.swing.JFrame {
     private void exitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitItemActionPerformed
-
-    private void jTextAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaKeyTyped
-        LinkedList.insert(jTextArea.getText());
-        LinkedList.print();
-    }//GEN-LAST:event_jTextAreaKeyTyped
 
     private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
         try {
@@ -151,6 +160,11 @@ public class TextEditor extends javax.swing.JFrame {
     private void txtFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldFocusGained
         
     }//GEN-LAST:event_txtFieldFocusGained
+
+    private void jTextAreaTextChanged() {
+        LinkedList.insert(jTextArea.getText());
+        LinkedList.print();
+    }
 
     /**
      * @param args the command line arguments

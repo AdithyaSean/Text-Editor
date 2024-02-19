@@ -26,17 +26,13 @@ public class LinkedList {
             head = node;
             tail = node;
         } else {
-            Node currentNode = head;
-            while (currentNode.next != null) {
-                currentNode = currentNode.next;
-            }
-            currentNode.next = node;
-            node.prev = currentNode;
+            tail.next = node;
+            node.prev = tail;
             tail = node;
         }
     }
 
     public static void print() {
-        System.out.println(tail.data);
+        System.out.println(head.data + " - " + tail.data);
     }
 }
