@@ -121,28 +121,11 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextAreaKeyTyped
 
     private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
-        String filePath = System.getProperty("user.home"); // file path
         
-        
-        try {
-            File file = new File(filePath);
-            String line;
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            while ((line = reader.readLine()) != null) {
-                jTextArea.append(line + "\n"); // Append each line to the TextArea
-            }
-            reader.close();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }//GEN-LAST:event_openItemActionPerformed
 
     private void txtFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldFocusGained
-        if(txtField.getText().equals("Find and Replace")){
-            txtField.setText("");
-        }
-       
+        
     }//GEN-LAST:event_txtFieldFocusGained
 
     /**
