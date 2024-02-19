@@ -46,11 +46,6 @@ public class TextEditor extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea);
 
         jMenu.setText("File");
-        jMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuActionPerformed(evt);
-            }
-        });
 
         openItem.setText("Open");
         openItem.addActionListener(new java.awt.event.ActionListener() {
