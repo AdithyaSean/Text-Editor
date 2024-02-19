@@ -1,5 +1,4 @@
 import java.io.*;
-
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
