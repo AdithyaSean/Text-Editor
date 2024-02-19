@@ -44,26 +44,14 @@ public class TextEditor extends javax.swing.JFrame {
 
         jTextArea.setColumns(20);
         jTextArea.setRows(5);
-        jTextArea.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                jTextAreaTextChanged();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                jTextAreaTextChanged();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                jTextAreaTextChanged();
-            }
-        });
-
         jScrollPane2.setViewportView(jTextArea);
 
         jMenu.setText("File");
+        jMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActionPerformed(evt);
+            }
+        });
 
         openItem.setText("Open");
         openItem.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +89,7 @@ public class TextEditor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonRedo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtField, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                        .addComponent(txtField, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonFind)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -119,7 +107,7 @@ public class TextEditor extends javax.swing.JFrame {
                     .addComponent(jButtonReplace)
                     .addComponent(txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
