@@ -26,12 +26,12 @@ public class LinkedList {
             head = node;
             tail = node;
         } else {
-            Node currentnode = head;
-            while (currentnode.next != null) {
-                currentnode = currentnode.next;
+            Node currentNode = head;
+            while (currentNode.next != null) {
+                currentNode = currentNode.next;
             }
-            currentnode.next = node;
-            node.prev = currentnode;
+            currentNode.next = node;
+            node.prev = currentNode;
             tail = node;
         }
     }
