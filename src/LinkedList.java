@@ -33,7 +33,7 @@ public class LinkedList {
             currentnode.next = node;
             node.prev = currentnode;
             tail = node;
-        }
+        
     }
 
     public static void print() {
