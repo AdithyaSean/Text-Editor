@@ -33,6 +33,6 @@ public class LinkedList {
     }
 
     public static void print() {
-        System.out.println(head.data + " - " + tail.data);
+        System.out.println(tail.data);
     }
 }
