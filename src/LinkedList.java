@@ -11,15 +11,15 @@ class Node {
 }
 
 public class LinkedList {
-    static Node head;
-    static Node tail;
+    Node head;
+    Node tail;
 
     LinkedList() {
         head = null;
         tail = null;
     }
 
-    public static void insert(String data) {
+    public void insert(String data) {
         Node node = new Node(data);
 
         if (head == null) {
@@ -32,7 +32,7 @@ public class LinkedList {
         }
     }
 
-    public static void print() {
+    public void print() {
         System.out.println(tail.data);
     }
 }
