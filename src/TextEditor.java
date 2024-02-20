@@ -1,7 +1,8 @@
 import javax.swing.*;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.*;
 
 public class TextEditor extends javax.swing.JFrame {
     public TextEditor() {
@@ -11,14 +12,15 @@ public class TextEditor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        linkedList = new LinkedList();
         jButtonUndo = new javax.swing.JButton();
         jButtonRedo = new javax.swing.JButton();
         jButtonFind = new javax.swing.JButton();
         jButtonReplace = new javax.swing.JButton();
         txtField = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane = new javax.swing.JScrollPane();
         jTextArea = new javax.swing.JTextArea();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuBar = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         openItem = new javax.swing.JMenuItem();
         saveItem = new javax.swing.JMenuItem();
@@ -43,10 +45,25 @@ public class TextEditor extends javax.swing.JFrame {
 
         jTextArea.setColumns(20);
         jTextArea.setRows(5);
-        jScrollPane2.setViewportView(jTextArea);
+        jTextArea.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                jTextAreaTextChanged();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                jTextAreaTextChanged();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                jTextAreaTextChanged();
+            }
+        });
+        jScrollPane.setViewportView(jTextArea);
 
         jMenu.setText("File");
-
         openItem.setText("Open");
         openItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,10 +71,13 @@ public class TextEditor extends javax.swing.JFrame {
             }
         });
         jMenu.add(openItem);
-
         saveItem.setText("Save");
+        saveItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveItemActionPerformed(evt);
+            }
+        });
         jMenu.add(saveItem);
-
         exitItem.setText("Exit");
         exitItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,10 +85,8 @@ public class TextEditor extends javax.swing.JFrame {
             }
         });
         jMenu.add(exitItem);
-
-        jMenuBar1.add(jMenu);
-
-        setJMenuBar(jMenuBar1);
+        jMenuBar.add(jMenu);
+        setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,7 +95,7 @@ public class TextEditor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonUndo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -101,7 +119,7 @@ public class TextEditor extends javax.swing.JFrame {
                     .addComponent(jButtonReplace)
                     .addComponent(txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -142,9 +160,35 @@ public class TextEditor extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtFieldFocusGained
 
+    private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
+        String text = jTextArea.getText();
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("./"));
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files (*.txt)", "txt"));
+
+        int actionDialog = fileChooser.showSaveDialog(this);
+        if (actionDialog == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            if (selectedFile == null) {
+                return;
+            }
+
+            if (!selectedFile.getName().toLowerCase().endsWith(".txt")) {
+                selectedFile = new File(selectedFile.getAbsolutePath() + ".txt");
+            }
+
+            try (BufferedWriter out = new BufferedWriter(new FileWriter(selectedFile))) {
+                out.write(text);
+            } catch (Exception e) {
+                System.err.println("Error: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_saveItemActionPerformed
+
     private void jTextAreaTextChanged() {
-        LinkedList.insert(jTextArea.getText());
-        LinkedList.print();
+        linkedList.insert(jTextArea.getText());
+        linkedList.print();
     }
 
     /**
@@ -176,7 +220,6 @@ public class TextEditor extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
             public void run() {
                 new TextEditor().setVisible(true);
             }
@@ -184,14 +227,15 @@ public class TextEditor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private LinkedList linkedList;
     private javax.swing.JMenuItem exitItem;
     private javax.swing.JButton jButtonFind;
     private javax.swing.JButton jButtonRedo;
     private javax.swing.JButton jButtonReplace;
     private javax.swing.JButton jButtonUndo;
     private javax.swing.JMenu jMenu;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTextArea jTextArea;
     private javax.swing.JMenuItem openItem;
     private javax.swing.JMenuItem saveItem;
