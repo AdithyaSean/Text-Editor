@@ -132,15 +132,6 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_exitItemActionPerformed
 
     private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
-        try {
-            openFile();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_openItemActionPerformed
-
-    private void openFile() {
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(null);
 
@@ -148,13 +139,13 @@ public class TextEditor extends javax.swing.JFrame {
             File selectedFile = fileChooser.getSelectedFile();
             try {
                 FileReader reader = new FileReader(selectedFile);
-                jTextArea.read(reader, null);
+                jTextArea.setText(reader.getEncoding());
                 reader.close();
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "Error reading file: " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "error reading file: " + ex.getMessage());
             }
         }
-    }
+    }//GEN-LAST:event_openItemActionPerformed
 
     private void txtFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldFocusGained
         
