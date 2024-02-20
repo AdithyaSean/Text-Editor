@@ -150,11 +150,11 @@ public class TextEditor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_openItemActionPerformed
 
+
+
     private void txtFieldFocusGained() {//GEN-FIRST:event_txtFieldFocusGained
         
     }//GEN-LAST:event_txtFieldFocusGained
-
-
 
     private void jTextAreaTextChanged() {//GEN-FIRST:event_jTextAreaTextChanged
         linkedList.insert(jTextArea.getText());
