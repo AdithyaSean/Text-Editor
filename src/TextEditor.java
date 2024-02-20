@@ -152,6 +152,7 @@ public class TextEditor extends javax.swing.JFrame {
 
 
 
+
     private void txtFieldFocusGained() {//GEN-FIRST:event_txtFieldFocusGained
         
     }//GEN-LAST:event_txtFieldFocusGained
