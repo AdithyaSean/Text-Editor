@@ -137,12 +137,15 @@ public class TextEditor extends javax.swing.JFrame {
 
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            try {
-                FileReader reader = new FileReader(selectedFile);
-                jTextArea.setText(reader.getEncoding());
-                reader.close();
+            try (BufferedReader reader = new BufferedReader(new FileReader(selectedFile))) {
+                StringBuilder content = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
+                jTextArea.setText(content.toString());
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "error reading file: " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Error reading file: " + ex.getMessage());
             }
         }
     }//GEN-LAST:event_openItemActionPerformed
