@@ -39,7 +39,7 @@ public class TextEditor extends javax.swing.JFrame {
         txtField.setText("Find and Replace");
         txtField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtFieldFocusGained(evt);
+                txtFieldFocusGained();
             }
         });
 
@@ -67,21 +67,21 @@ public class TextEditor extends javax.swing.JFrame {
         openItem.setText("Open");
         openItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openItemActionPerformed(evt);
+                openItemActionPerformed();
             }
         });
         jMenu.add(openItem);
         saveItem.setText("Save");
         saveItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveItemActionPerformed(evt);
+                saveItemActionPerformed();
             }
         });
         jMenu.add(saveItem);
         exitItem.setText("Exit");
         exitItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitItemActionPerformed(evt);
+                exitItemActionPerformed();
             }
         });
         jMenu.add(exitItem);
@@ -127,11 +127,11 @@ public class TextEditor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitItemActionPerformed
+    private void exitItemActionPerformed() {//GEN-FIRST:event_exitItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitItemActionPerformed
 
-    private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
+    private void openItemActionPerformed() {//GEN-FIRST:event_openItemActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(null);
 
@@ -150,11 +150,11 @@ public class TextEditor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_openItemActionPerformed
 
-    private void txtFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldFocusGained
+    private void txtFieldFocusGained() {//GEN-FIRST:event_txtFieldFocusGained
         
     }//GEN-LAST:event_txtFieldFocusGained
 
-    private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
+    private void saveItemActionPerformed() {//GEN-FIRST:event_saveItemActionPerformed
         String text = jTextArea.getText();
 
         JFileChooser fileChooser = new JFileChooser();
@@ -180,10 +180,10 @@ public class TextEditor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveItemActionPerformed
 
-    private void jTextAreaTextChanged() {
+    private void jTextAreaTextChanged() {//GEN-FIRST:event_jTextAreaTextChanged
         linkedList.insert(jTextArea.getText());
         linkedList.print();
-    }
+    }//GEN-LAST:event_jTextAreaTextChanged
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
