@@ -171,7 +171,7 @@ public class TextEditor extends javax.swing.JFrame {
             if (!selectedFile.getName().toLowerCase().endsWith(".txt")) {
                 selectedFile = new File(selectedFile.getAbsolutePath() + ".txt");
             }
-
+            
             try (BufferedWriter out = new BufferedWriter(new FileWriter(selectedFile))) {
                 out.write(text);
             } catch (Exception e) {
