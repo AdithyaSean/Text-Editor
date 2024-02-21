@@ -9,41 +9,10 @@ class Node {
         this.next = null;
     }
 }
-class Stack{
-    char [] data;
-    int top;
-     
-    public Stack(){
-        data = new char[20];
-        top = -1;
-    }
-    public void push(char c){
-        if(top==data.length){
-            System.out.println("Reached undo limit");
-        }
-        else{
-            data[++top] = c;
-        }
-    }
-
-    public void pop(){
-        if(top==-1){
-            System.out.println("Cannot Redo further");
-        }else{
-            top -=1;
-        }
-        
-    }
-}
 
 public class LinkedList {
     static Node head;
     static Node tail;
-
-    LinkedList() {
-        head = null;
-        tail = null;
-    }
 
     public static void insert(String data) {
         Node node = new Node(data);

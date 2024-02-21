@@ -1,13 +1,14 @@
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class TextEditor extends javax.swing.JFrame {
     public TextEditor() {
         initComponents();
     }
+    
     private int highlightIndex = -1;
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -15,23 +16,52 @@ public class TextEditor extends javax.swing.JFrame {
 
         jButtonUndo = new javax.swing.JButton();
         jButtonRedo = new javax.swing.JButton();
+        txtFind = new javax.swing.JTextField();
+        txtReplace = new javax.swing.JTextField();
         jButtonFind = new javax.swing.JButton();
         jButtonReplace = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jButtonSort = new javax.swing.JButton();
+        jButtonClear = new javax.swing.JButton();
+        jScrollPane = new javax.swing.JScrollPane();
         jTextArea = new javax.swing.JTextArea();
-        txtReplace = new javax.swing.JTextField();
-        txtFind = new javax.swing.JTextField();
         jMenuBar = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         openItem = new javax.swing.JMenuItem();
         saveItem = new javax.swing.JMenuItem();
         exitItem = new javax.swing.JMenuItem();
+        jMenuEdit = new javax.swing.JMenu();
+        undoItem = new javax.swing.JMenuItem();
+        redoItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonUndo.setText("Undo");
 
         jButtonRedo.setText("Redo");
+
+        txtFind.setText("Find the word");
+        txtFind.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFindFocusGained(evt);
+            }
+        });
+        txtFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFindActionPerformed(evt);
+            }
+        });
+
+        txtReplace.setText("Replace the word");
+        txtReplace.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtReplaceFocusGained(evt);
+            }
+        });
+        txtReplace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtReplaceActionPerformed(evt);
+            }
+        });
 
         jButtonFind.setText("Find");
         jButtonFind.addActionListener(new java.awt.event.ActionListener() {
@@ -47,33 +77,34 @@ public class TextEditor extends javax.swing.JFrame {
             }
         });
 
+        jButtonSort.setText("Sort");
+        jButtonSort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSortActionPerformed(evt);
+            }
+        });
+
+        jButtonClear.setText("Clear");
+
         jTextArea.setColumns(20);
         jTextArea.setRows(5);
-        jScrollPane2.setViewportView(jTextArea);
+	jTextArea.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                jTextAreaTextChanged();
+            }
 
-        txtReplace.setText("Replace the word");
-        txtReplace.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtReplaceFocusGained(evt);
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                jTextAreaTextChanged();
             }
-        });
-        txtReplace.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtReplaceActionPerformed(evt);
-            }
-        });
 
-        txtFind.setText("Find the word");
-        txtFind.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtFindFocusGained(evt);
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                jTextAreaTextChanged();
             }
         });
-        txtFind.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFindActionPerformed(evt);
-            }
-        });
+        jScrollPane.setViewportView(jTextArea);
 
         jMenu.setText("File");
 
@@ -103,6 +134,16 @@ public class TextEditor extends javax.swing.JFrame {
 
         jMenuBar.add(jMenu);
 
+        jMenuEdit.setText("Edit");
+
+        undoItem.setText("Undo");
+        jMenuEdit.add(undoItem);
+
+        redoItem.setText("Redo");
+        jMenuEdit.add(redoItem);
+
+        jMenuBar.add(jMenuEdit);
+
         setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -112,20 +153,23 @@ public class TextEditor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonUndo)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonUndo)
+                            .addComponent(jButtonRedo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRedo)
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtReplace, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonFind)
-                            .addComponent(jButtonReplace))
-                        .addGap(78, 78, 78)))
+                            .addComponent(txtFind)
+                            .addComponent(txtReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonReplace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonFind, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -134,15 +178,17 @@ public class TextEditor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonUndo)
-                    .addComponent(jButtonRedo)
                     .addComponent(jButtonFind)
-                    .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSort))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtReplace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonReplace))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonReplace)
+                    .addComponent(jButtonRedo)
+                    .addComponent(jButtonClear))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -256,6 +302,10 @@ public class TextEditor extends javax.swing.JFrame {
                 clearHighlight();
     }//GEN-LAST:event_jButtonReplaceActionPerformed
 
+    private void jButtonSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSortActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -290,17 +340,22 @@ public class TextEditor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem exitItem;
+    private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonFind;
     private javax.swing.JButton jButtonRedo;
     private javax.swing.JButton jButtonReplace;
+    private javax.swing.JButton jButtonSort;
     private javax.swing.JButton jButtonUndo;
     private javax.swing.JMenu jMenu;
     private javax.swing.JMenuBar jMenuBar;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenu jMenuEdit;
+    private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTextArea jTextArea;
     private javax.swing.JMenuItem openItem;
+    private javax.swing.JMenuItem redoItem;
     private javax.swing.JMenuItem saveItem;
     private javax.swing.JTextField txtFind;
     private javax.swing.JTextField txtReplace;
+    private javax.swing.JMenuItem undoItem;
     // End of variables declaration//GEN-END:variables
 }
