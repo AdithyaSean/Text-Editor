@@ -45,21 +45,11 @@ public class TextEditor extends javax.swing.JFrame {
                 txtFindFocusGained(evt);
             }
         });
-        txtFind.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFindActionPerformed(evt);
-            }
-        });
 
         txtReplace.setText("Replace the word");
         txtReplace.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtReplaceFocusGained(evt);
-            }
-        });
-        txtReplace.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtReplaceActionPerformed(evt);
             }
         });
 
@@ -88,7 +78,7 @@ public class TextEditor extends javax.swing.JFrame {
 
         jTextArea.setColumns(20);
         jTextArea.setRows(5);
-	jTextArea.getDocument().addDocumentListener(new DocumentListener() {
+        jTextArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 jTextAreaTextChanged();
@@ -250,10 +240,6 @@ public class TextEditor extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitItemActionPerformed
     
-    private void txtFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindActionPerformed
-       
-    }//GEN-LAST:event_txtFindActionPerformed
-
     private void highlightText() {
         jTextArea.setCaretPosition(highlightIndex);
         jTextArea.setSelectionStart(highlightIndex);
@@ -265,10 +251,6 @@ public class TextEditor extends javax.swing.JFrame {
         jTextArea.setSelectionEnd(0);
     }
      
-    private void txtReplaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReplaceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtReplaceActionPerformed
-
     private void txtFindFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFindFocusGained
         if(txtFind.getText().equals("Find the word")){
             txtFind.setText("");}
