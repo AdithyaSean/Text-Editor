@@ -8,6 +8,7 @@ public class TextEditor extends javax.swing.JFrame {
     public TextEditor() {
         initComponents();
     }
+    private int highlightIndex = -1;
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -202,11 +203,22 @@ public class TextEditor extends javax.swing.JFrame {
     private void exitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitItemActionPerformed
-
+    
     private void txtFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindActionPerformed
-        
+       
     }//GEN-LAST:event_txtFindActionPerformed
 
+    private void highlightText() {
+        jTextArea.setCaretPosition(highlightIndex);
+        jTextArea.setSelectionStart(highlightIndex);
+        jTextArea.setSelectionEnd(highlightIndex + txtFind.getText().length());
+        jTextArea.requestFocusInWindow();
+    }
+     private void clearHighlight() {
+        jTextArea.setSelectionStart(0);
+        jTextArea.setSelectionEnd(0);
+    }
+     
     private void txtReplaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReplaceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtReplaceActionPerformed
@@ -222,11 +234,26 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtReplaceFocusGained
 
     private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
-        // TODO add your handling code here:
+         String searchText = txtFind.getText();
+                String content = jTextArea.getText();
+                int index = content.indexOf(searchText);
+
+                if (index != -1) {
+                    highlightIndex = index;
+                    highlightText();
+                } else {
+                    JOptionPane.showMessageDialog(TextEditor.this, "Text not found.");
+                    clearHighlight();
+                }
     }//GEN-LAST:event_jButtonFindActionPerformed
 
     private void jButtonReplaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReplaceActionPerformed
-        // TODO add your handling code here:
+        String searchText = txtFind.getText();
+                String replaceText = txtReplace.getText();
+                String content = jTextArea.getText();
+                content = content.replace(searchText, replaceText);
+                jTextArea.setText(content);
+                clearHighlight();
     }//GEN-LAST:event_jButtonReplaceActionPerformed
 
     public static void main(String args[]) {
