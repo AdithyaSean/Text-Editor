@@ -150,7 +150,31 @@ public class TextEditor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_openItemActionPerformed
 
+    private void saveItemActionPerformed() {//GEN-FIRST:event_saveItemActionPerformed
+        String text = jTextArea.getText();
 
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("./"));
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files (*.txt)", "txt"));
+
+        int actionDialog = fileChooser.showSaveDialog(this);
+        if (actionDialog == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            if (selectedFile == null) {
+                return;
+            }
+
+            if (!selectedFile.getName().toLowerCase().endsWith(".txt")) {
+                selectedFile = new File(selectedFile.getAbsolutePath() + ".txt");
+            }
+            
+            try (BufferedWriter out = new BufferedWriter(new FileWriter(selectedFile))) {
+                out.write(text);
+            } catch (Exception e) {
+                System.err.println("Error: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_saveItemActionPerformed
 
     private void txtFieldFocusGained() {//GEN-FIRST:event_txtFieldFocusGained
         
