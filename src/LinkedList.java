@@ -26,6 +26,7 @@ public class LinkedList {
             tail = node;
         }
     }
+    
     public static String undo() {
     if (head == null || head.next == null) {
         System.out.println("Cannot Undo: List is empty or has only one node");
