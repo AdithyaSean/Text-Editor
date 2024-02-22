@@ -9,7 +9,9 @@ public class Heap {
         Heap = new int[this.maxsize];
     }
 
-    
+    private int parent(int pos) { 
+        return (pos - 1) / 2;
+    }
 
     private int leftChild(int pos) {
         return (2 * pos) + 1;
