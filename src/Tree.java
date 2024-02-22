@@ -42,7 +42,7 @@ class BST {
         }
         
         inorderTraversal(root.left, sortedText);
-        sortedText.append(root.word).append(" ");
+        sortedText.append(root.word).append("\n");
         inorderTraversal(root.right, sortedText);
     }
 }
