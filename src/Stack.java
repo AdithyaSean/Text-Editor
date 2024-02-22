@@ -1,25 +1,33 @@
 public class Stack {
-    char [] data;
-    int top;
-     
-    public Stack(){
-        data = new char[20];
-        top = -1;
-    }
-    public void push(char c){
-        if(top==data.length){
-            System.out.println("Reached undo limit");
-        }
-        else{
-            data[++top] = c;
-        }
+    static int top = -1;
+    static String[] data = new String[50];
+    
+    public static boolean isFull() {
+        return top == 49;
     }
 
-    public void pop(){
-        if(top==-1){
-            System.out.println("Cannot Redo further");
-        }else{
-            top -=1;
+    public static boolean isEmpty() {
+        return top == -1;
+    }
+    
+    public static void push(String string) {
+        if (!isFull()) {
+            data[++top] = string;
+            System.out.println("value " + string + " added");            
+        } else {
+            System.out.println("stack is full");
         }
+    }
+    
+    public static void pop() {
+        if (!isEmpty()) {
+            System.out.println("value " + data[top--] + " removed");
+        } else {
+            System.out.println("stack is empty");
+        }
+    }
+    
+    public static String peek() {
+        return data[top];
     }
 }

@@ -1,8 +1,6 @@
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 public class TextEditor extends javax.swing.JFrame {
     public TextEditor() {
@@ -34,6 +32,7 @@ public class TextEditor extends javax.swing.JFrame {
         redoItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Text Editor");
 
         jButtonUndo.setText("Undo");
         jButtonUndo.addActionListener(new java.awt.event.ActionListener() {
@@ -43,6 +42,11 @@ public class TextEditor extends javax.swing.JFrame {
         });
 
         jButtonRedo.setText("Redo");
+        jButtonRedo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRedoActionPerformed(evt);
+            }
+        });
 
         txtFind.setText("Find the word");
         txtFind.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -82,21 +86,9 @@ public class TextEditor extends javax.swing.JFrame {
         jButtonClear.setText("Clear");
 
         jTextArea.setColumns(20);
-        jTextArea.setRows(5);
-        jTextArea.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                jTextAreaTextChanged();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                jTextAreaTextChanged();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                jTextAreaTextChanged();
+        jTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextAreaKeyReleased(evt);
             }
         });
         jTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -195,18 +187,8 @@ public class TextEditor extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
-    BST bst = new BST();
-    private void jTextAreaTextChanged() {//GEN-FIRST:event_jTextAreaTextChanged
-        String text = jTextArea.getText().trim(); // Trim to remove leading/trailing whitespaces
-        String[] words = text.split("\\s+");
-        LinkedList.insert(text);
-        LinkedList.print();
-
-        for (String word : words) {
-            bst.insert(word);
-        }
-    }//GEN-LAST:event_jTextAreaTextChanged
+  
+     BST bst = new BST();
 
     private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
         JFileChooser fileChooser = new JFileChooser();
@@ -279,44 +261,54 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtReplaceFocusGained
 
     private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
-         String searchText = txtFind.getText();
-                String content = jTextArea.getText();
-                int index = content.indexOf(searchText);
+        String searchText = txtFind.getText();
+        String content = jTextArea.getText();
+        int index = content.indexOf(searchText);
 
-                if (index != -1) {
-                    highlightIndex = index;
-                    highlightText();
-                } else {
-                    JOptionPane.showMessageDialog(TextEditor.this, "Text not found.");
-                    clearHighlight();
-                }
+        if (index != -1) {
+            highlightIndex = index;
+            highlightText();
+        } else {
+            JOptionPane.showMessageDialog(TextEditor.this, "Text not found.");
+            clearHighlight();
+        }
     }//GEN-LAST:event_jButtonFindActionPerformed
 
     private void jButtonReplaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReplaceActionPerformed
         String searchText = txtFind.getText();
-                String replaceText = txtReplace.getText();
-                String content = jTextArea.getText();
-                content = content.replace(searchText, replaceText);
-                jTextArea.setText(content);
-                clearHighlight();
+        String replaceText = txtReplace.getText();
+        String content = jTextArea.getText();
+        content = content.replace(searchText, replaceText);
+        jTextArea.setText(content);
+        clearHighlight();
     }//GEN-LAST:event_jButtonReplaceActionPerformed
 
     private void jButtonSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortActionPerformed
         StringBuilder sortedText = new StringBuilder();
-        bst.inorderTraversal(bst.root, sortedText); // Traverse the BST to get sorted words
+        bst.inorderTraversal(bst.root, sortedText);
         String trimmedText = sortedText.toString().trim();
-
         jTextArea.setText(trimmedText);
     }//GEN-LAST:event_jButtonSortActionPerformed
 
     private void jButtonUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUndoActionPerformed
          jTextArea.setText(LinkedList.undo());
-        //LinkedList.undo();
     }//GEN-LAST:event_jButtonUndoActionPerformed
 
-    private void jTextAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaKeyPressed
-        
-    }//GEN-LAST:event_jTextAreaKeyPressed
+    private void jButtonRedoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRedoActionPerformed
+        jTextArea.setText(Stack.peek());
+        Stack.pop();
+    }//GEN-LAST:event_jButtonRedoActionPerformed
+
+    private void jTextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaKeyReleased
+        String text = jTextArea.getText().trim();
+        String[] words = text.split("\\s+");
+        LinkedList.insert(text);
+        LinkedList.print();
+
+        for (String word : words) {
+            bst.insert(word);
+        }
+    }//GEN-LAST:event_jTextAreaKeyReleased
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
