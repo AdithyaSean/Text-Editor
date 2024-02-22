@@ -183,6 +183,8 @@ public class TextEditor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+     BST bst = new BST();
+    
     private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(null);
@@ -277,7 +279,10 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonReplaceActionPerformed
 
     private void jButtonSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortActionPerformed
-        // TODO add your handling code here:
+        StringBuilder sortedText = new StringBuilder();
+        bst.inorderTraversal(bst.root, sortedText);
+        String trimmedText = sortedText.toString().trim();
+        jTextArea.setText(trimmedText);
     }//GEN-LAST:event_jButtonSortActionPerformed
 
     private void jButtonUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUndoActionPerformed
@@ -290,8 +295,14 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRedoActionPerformed
 
     private void jTextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaKeyReleased
-        LinkedList.insert(jTextArea.getText());
+        String text = jTextArea.getText().trim();
+        String[] words = text.split("\\s+");
+        LinkedList.insert(text);
         LinkedList.print();
+
+        for (String word : words) {
+            bst.insert(word);
+        }
     }//GEN-LAST:event_jTextAreaKeyReleased
 
     public static void main(String args[]) {
