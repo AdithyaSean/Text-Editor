@@ -25,24 +25,24 @@ class BST {
             return new Tree(word);
         }
 
-        // Compare the word with the current node's word
         int comparison = word.compareTo(root.word);
 
         if (comparison < 0) {
-            root.left = insertRec(root.left, word); // Move to the left subtree
+            root.left = insertRec(root.left, word);
         } else if (comparison > 0) {
-            root.right = insertRec(root.right, word); // Move to the right subtree
+            root.right = insertRec(root.right, word);
         }
 
         return root;
     }
 
-   public void inorderTraversal(Tree root, StringBuilder sortedText) {
-    if (root == null) {
-        return;
+    public void inorderTraversal(Tree root, StringBuilder sortedText) {
+        if (root == null) {
+            return;
+        }
+        
+        inorderTraversal(root.left, sortedText);
+        sortedText.append(root.word).append(" "); // Append the word to sortedText
+        inorderTraversal(root.right, sortedText);
     }
-    inorderTraversal(root.left, sortedText);
-    sortedText.append(root.word).append(" "); // Append the word to sortedText
-    inorderTraversal(root.right, sortedText);
-}
 }
