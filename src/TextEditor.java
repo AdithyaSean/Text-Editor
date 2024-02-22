@@ -91,6 +91,11 @@ public class TextEditor extends javax.swing.JFrame {
                 jTextAreaKeyReleased(evt);
             }
         });
+        jTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextAreaKeyPressed(evt);
+            }
+        });
         jScrollPane.setViewportView(jTextArea);
 
         jMenu.setText("File");
@@ -182,9 +187,9 @@ public class TextEditor extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+  
      BST bst = new BST();
-    
+
     private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(null);
