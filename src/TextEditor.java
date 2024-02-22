@@ -99,6 +99,11 @@ public class TextEditor extends javax.swing.JFrame {
                 jTextAreaTextChanged();
             }
         });
+        jTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextAreaKeyPressed(evt);
+            }
+        });
         jScrollPane.setViewportView(jTextArea);
 
         jMenu.setText("File");
@@ -190,10 +195,17 @@ public class TextEditor extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    BST bst = new BST();
     private void jTextAreaTextChanged() {//GEN-FIRST:event_jTextAreaTextChanged
-        LinkedList.insert(jTextArea.getText());
+        String text = jTextArea.getText().trim(); // Trim to remove leading/trailing whitespaces
+        String[] words = text.split("\\s+");
+        LinkedList.insert(text);
         LinkedList.print();
+
+        for (String word : words) {
+            bst.insert(word);
+        }
     }//GEN-LAST:event_jTextAreaTextChanged
 
     private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
@@ -290,13 +302,21 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonReplaceActionPerformed
 
     private void jButtonSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortActionPerformed
-        // TODO add your handling code here:
+        StringBuilder sortedText = new StringBuilder();
+        bst.inorderTraversal(bst.root, sortedText); // Traverse the BST to get sorted words
+        String trimmedText = sortedText.toString().trim();
+
+        jTextArea.setText(trimmedText);
     }//GEN-LAST:event_jButtonSortActionPerformed
 
     private void jButtonUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUndoActionPerformed
          jTextArea.setText(LinkedList.undo());
         //LinkedList.undo();
     }//GEN-LAST:event_jButtonUndoActionPerformed
+
+    private void jTextAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaKeyPressed
+        
+    }//GEN-LAST:event_jTextAreaKeyPressed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
