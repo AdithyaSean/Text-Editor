@@ -29,6 +29,11 @@ public class TextEditor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonUndo.setText("Undo");
+        jButtonUndo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUndoActionPerformed(evt);
+            }
+        });
 
         jButtonRedo.setText("Redo");
 
@@ -184,6 +189,11 @@ public class TextEditor extends javax.swing.JFrame {
         linkedList.insert(jTextArea.getText());
         linkedList.print();
     }//GEN-LAST:event_jTextAreaTextChanged
+
+    private void jButtonUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUndoActionPerformed
+        jTextArea.setText(LinkedList.undo());
+        //LinkedList.undo();
+    }//GEN-LAST:event_jButtonUndoActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
