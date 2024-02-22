@@ -34,6 +34,7 @@ public class TextEditor extends javax.swing.JFrame {
         redoItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Text Editor");
 
         jButtonUndo.setText("Undo");
         jButtonUndo.addActionListener(new java.awt.event.ActionListener() {
@@ -255,26 +256,26 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtReplaceFocusGained
 
     private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
-         String searchText = txtFind.getText();
-                String content = jTextArea.getText();
-                int index = content.indexOf(searchText);
+        String searchText = txtFind.getText();
+        String content = jTextArea.getText();
+        int index = content.indexOf(searchText);
 
-                if (index != -1) {
-                    highlightIndex = index;
-                    highlightText();
-                } else {
-                    JOptionPane.showMessageDialog(TextEditor.this, "Text not found.");
-                    clearHighlight();
-                }
+        if (index != -1) {
+            highlightIndex = index;
+            highlightText();
+        } else {
+            JOptionPane.showMessageDialog(TextEditor.this, "Text not found.");
+            clearHighlight();
+        }
     }//GEN-LAST:event_jButtonFindActionPerformed
 
     private void jButtonReplaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReplaceActionPerformed
         String searchText = txtFind.getText();
-                String replaceText = txtReplace.getText();
-                String content = jTextArea.getText();
-                content = content.replace(searchText, replaceText);
-                jTextArea.setText(content);
-                clearHighlight();
+        String replaceText = txtReplace.getText();
+        String content = jTextArea.getText();
+        content = content.replace(searchText, replaceText);
+        jTextArea.setText(content);
+        clearHighlight();
     }//GEN-LAST:event_jButtonReplaceActionPerformed
 
     private void jButtonSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortActionPerformed
