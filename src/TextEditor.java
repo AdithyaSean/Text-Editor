@@ -184,10 +184,6 @@ public class TextEditor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextAreaTextChanged() {//GEN-FIRST:event_jTextAreaTextChanged
-        
-    }//GEN-LAST:event_jTextAreaTextChanged
-
     private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(null);
