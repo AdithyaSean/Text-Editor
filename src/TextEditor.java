@@ -43,6 +43,11 @@ public class TextEditor extends javax.swing.JFrame {
         });
 
         jButtonRedo.setText("Redo");
+        jButtonRedo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRedoActionPerformed(evt);
+            }
+        });
 
         txtFind.setText("Find the word");
         txtFind.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -82,21 +87,9 @@ public class TextEditor extends javax.swing.JFrame {
         jButtonClear.setText("Clear");
 
         jTextArea.setColumns(20);
-        jTextArea.setRows(5);
-        jTextArea.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                jTextAreaTextChanged();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                jTextAreaTextChanged();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                jTextAreaTextChanged();
+        jTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextAreaKeyReleased(evt);
             }
         });
         jScrollPane.setViewportView(jTextArea);
@@ -192,8 +185,7 @@ public class TextEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextAreaTextChanged() {//GEN-FIRST:event_jTextAreaTextChanged
-        LinkedList.insert(jTextArea.getText());
-        LinkedList.print();
+        
     }//GEN-LAST:event_jTextAreaTextChanged
 
     private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
@@ -295,8 +287,17 @@ public class TextEditor extends javax.swing.JFrame {
 
     private void jButtonUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUndoActionPerformed
          jTextArea.setText(LinkedList.undo());
-        //LinkedList.undo();
     }//GEN-LAST:event_jButtonUndoActionPerformed
+
+    private void jButtonRedoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRedoActionPerformed
+        jTextArea.setText(Stack.peek());
+        Stack.pop();
+    }//GEN-LAST:event_jButtonRedoActionPerformed
+
+    private void jTextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaKeyReleased
+        LinkedList.insert(jTextArea.getText());
+        LinkedList.print();
+    }//GEN-LAST:event_jTextAreaKeyReleased
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

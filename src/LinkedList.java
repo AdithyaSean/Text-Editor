@@ -15,48 +15,40 @@ public class LinkedList {
     static Node tail;
 
     public static void insert(String data) {
-        Node node = new Node(data);
+        if (!data.equals("")) {
+            Node node = new Node(data);
 
-        if (head == null) {
-            head = node;
-            tail = node;
-        } else {
-            tail.next = node;
-            node.prev = tail;
-            tail = node;
+            if (head == null) {
+                head = node;
+                tail = node;
+            } else {
+                tail.next = node;
+                node.prev = tail;
+                tail = node;
+            }
         }
     }
     
     public static String undo() {
-    if (head == null || head.next == null) {
-        System.out.println("Cannot Undo: List is empty or has only one node");
-        return ""; // Return an empty string or handle this case as appropriate
-    }
+        if (tail != null) {
+            Stack.push(tail.data);
+            tail = tail.prev;
 
-    Node currentnode = head;
-    Node previousnode = null;
-    
-    // Traverse to the last node
-    while (currentnode.next != null) {
-        previousnode = currentnode;
-        currentnode = currentnode.next;
-    }
-    
-    // Remove the last node
-    currentnode.prev = null;
-    if (previousnode != null) {
-        previousnode.next = null;
-    } else {
-        head = null; // Update head if there's only one node in the list
-    }
+            if (tail != null) {
+                tail.next = null;
+            } else {
+                head = null;
+            }
 
-    // Return the data of the new last node if it exists
-    if (previousnode != null) {
-        return previousnode.data;
-    } else {
-        return ""; // Return an empty string or handle this case as appropriate
+            return tail == null ? "" : tail.data;
+        } else {
+            return "";
+        }
     }
-}
+    
+    public static String redo() {
+        return Stack.peek();
+    }
 
     public static void print() {
         System.out.println(tail.data);
