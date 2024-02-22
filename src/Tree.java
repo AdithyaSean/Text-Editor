@@ -45,4 +45,8 @@ class BST {
         sortedText.append(root.word).append("\n");
         inorderTraversal(root.right, sortedText);
     }
+    
+    public void clear() {
+        root = null;
+    }
 }

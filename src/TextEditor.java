@@ -84,6 +84,11 @@ public class TextEditor extends javax.swing.JFrame {
         });
 
         jButtonClear.setText("Clear");
+        jButtonClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearActionPerformed(evt);
+            }
+        });
 
         jTextArea.setColumns(20);
         jTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -304,6 +309,13 @@ public class TextEditor extends javax.swing.JFrame {
             bst.insert(word);
         }
     }//GEN-LAST:event_jTextAreaKeyReleased
+
+    private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
+        bst.clear();
+        LinkedList.clear();
+        Stack.clear();
+        jTextArea.setText(null);
+    }//GEN-LAST:event_jButtonClearActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

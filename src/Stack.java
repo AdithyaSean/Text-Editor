@@ -30,4 +30,8 @@ public class Stack {
     public static String peek() {
         return data[top];
     }
+    
+    public static void clear() {
+        top = -1;
+    }
 }

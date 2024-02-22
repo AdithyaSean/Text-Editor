@@ -53,4 +53,9 @@ public class LinkedList {
     public static void print() {
         System.out.println(tail.data);
     }
+    
+    public static void clear() {
+        head = null;
+        tail = null;
+    }
 }
