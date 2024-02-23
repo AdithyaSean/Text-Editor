@@ -291,11 +291,12 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSortActionPerformed
 
     private void jButtonUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUndoActionPerformed
-         
+         jTextArea.setText(LinkedList.undo());
     }//GEN-LAST:event_jButtonUndoActionPerformed
 
     private void jButtonRedoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRedoActionPerformed
-       
+        jTextArea.setText(Stack.peek());
+        Stack.pop();
     }//GEN-LAST:event_jButtonRedoActionPerformed
 
     private void jTextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaKeyReleased
@@ -312,7 +313,7 @@ public class TextEditor extends javax.swing.JFrame {
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
         bst.clear();
         LinkedList.clear();
-        //Stack.clear();
+        Stack.clear();
         jTextArea.setText(null);
     }//GEN-LAST:event_jButtonClearActionPerformed
 
