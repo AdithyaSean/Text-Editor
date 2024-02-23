@@ -29,7 +29,26 @@ public class LinkedList {
         }
     }
     
+    public static String undo() {
+        if (tail != null) {
+            Stack.push(tail.data);
+            tail = tail.prev;
+
+            if (tail != null) {
+                tail.next = null;
+            } else {
+                head = null;
+            }
+
+            return tail == null ? "" : tail.data;
+        } else {
+            return "";
+        }
+    }
     
+    public static String redo() {
+        return Stack.peek();
+    }
 
     public static void print() {
         System.out.println(tail.data);
