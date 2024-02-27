@@ -305,8 +305,10 @@ public class TextEditor extends javax.swing.JFrame {
         LinkedList.insert(text);
         LinkedList.print();
 
-        for (String word : words) {
-            bst.insert(word);
+        if (evt.getKeyCode() == 32 || evt.getKeyCode() == 10) {
+                for (String word : words) {
+                bst.insert(word);
+            }
         }
     }//GEN-LAST:event_jTextAreaKeyReleased
 
