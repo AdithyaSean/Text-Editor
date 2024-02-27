@@ -284,6 +284,13 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonReplaceActionPerformed
 
     private void jButtonSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortActionPerformed
+        String text = jTextArea.getText().trim();
+        String[] words = text.split("\\s+");
+
+        for (String word : words) {
+            bst.insert(word);
+        }
+        
         StringBuilder sortedText = new StringBuilder();
         bst.inorderTraversal(bst.root, sortedText);
         String trimmedText = sortedText.toString().trim();
