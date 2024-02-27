@@ -302,8 +302,7 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonUndoActionPerformed
 
     private void jButtonRedoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRedoActionPerformed
-        jTextArea.setText(Stack.peek());
-        Stack.pop();
+        jTextArea.setText(LinkedList.redo());
     }//GEN-LAST:event_jButtonRedoActionPerformed
 
     private void jTextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaKeyReleased

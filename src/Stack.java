@@ -1,9 +1,9 @@
 public class Stack {
     static int top = -1;
-    static String[] data = new String[50];
+    static String[] data = new String[100];
     
     public static boolean isFull() {
-        return top == 49;
+        return top == 99;
     }
 
     public static boolean isEmpty() {
@@ -13,7 +13,7 @@ public class Stack {
     public static void push(String string) {
         if (!isFull()) {
             data[++top] = string;
-            System.out.println("value " + string + " added");            
+            System.out.println("value " + string + " added to the stack");            
         } else {
             System.out.println("stack is full");
         }
@@ -21,7 +21,7 @@ public class Stack {
     
     public static void pop() {
         if (!isEmpty()) {
-            System.out.println("value " + data[top--] + " removed");
+            System.out.println("value " + data[top--] + " removed from the stack");
         } else {
             System.out.println("stack is empty");
         }

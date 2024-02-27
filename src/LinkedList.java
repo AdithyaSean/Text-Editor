@@ -47,7 +47,13 @@ public class LinkedList {
     }
     
     public static String redo() {
-        return Stack.peek();
+        if (Stack.isEmpty()) {
+            return null;
+        } else {
+            String string = Stack.peek();
+            Stack.pop();
+            return string;
+        }
     }
 
     public static void print() {
